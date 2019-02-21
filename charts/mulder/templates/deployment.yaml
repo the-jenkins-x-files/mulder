@@ -23,6 +23,9 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.service.internalPort }}
+        args:
+        - redis-addr
+        - {{ .Release.Name }}-redis-master:6379
         livenessProbe:
           httpGet:
             path: {{ .Values.probePath }}

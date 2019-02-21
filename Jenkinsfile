@@ -26,7 +26,7 @@ pipeline {
             sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:$PREVIEW_VERSION"
           }
           dir('/home/jenkins/go/src/github.com/bencyril/mulder/charts/mulder') {
-            sh "jx step helm build"
+            sh "jx step helm build "
           }
           dir('/home/jenkins/go/src/github.com/bencyril/mulder/charts/preview') {
             sh "make preview"

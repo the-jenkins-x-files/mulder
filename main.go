@@ -37,6 +37,8 @@ var (
 		"I want to believe.",
 		"TRUST NO-ONE",
 		"What can I do about a Lie with an Official Seal on it?",
+		"Aliens!",
+		"My father... ",
 	}
 
 	listenAddr          string

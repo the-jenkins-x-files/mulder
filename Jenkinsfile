@@ -31,7 +31,10 @@ pipeline {
           }
           dir('/home/jenkins/go/src/github.com/kr1kr1/mulder/charts/preview') {
             sh "make preview"
-            sh "jx preview --app $APP_NAME --dir ../.."
+            sh "jx preview --app $APP_NAME --namespace $PREVIEW_NAMESPACE --dir ../.."
+          }
+          dir('/home/jenkins/go/src/github.com/kr1kr1/mulder') {
+            sh "make test-integration MULDER_ADDR=mulder.$PREVIEW_NAMESPACE"
           }
         }
       }

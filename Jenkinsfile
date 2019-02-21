@@ -21,6 +21,7 @@ pipeline {
         container('go') {
           dir('/home/jenkins/go/src/github.com/kr1kr1/mulder') {
             checkout scm
+            sh "make test-unit"
             sh "make linux"
             sh "export VERSION=$PREVIEW_VERSION && skaffold build -f skaffold.yaml"
             sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:$PREVIEW_VERSION"
@@ -30,7 +31,10 @@ pipeline {
           }
           dir('/home/jenkins/go/src/github.com/kr1kr1/mulder/charts/preview') {
             sh "make preview"
-            sh "jx preview --app $APP_NAME --dir ../.."
+            sh "jx preview --app $APP_NAME --namespace $PREVIEW_NAMESPACE --dir ../.."
+          }
+          dir('/home/jenkins/go/src/github.com/kr1kr1/mulder') {
+            sh "make test-integration MULDER_ADDR=mulder.$PREVIEW_NAMESPACE"
           }
         }
       }

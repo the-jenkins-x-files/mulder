@@ -18,8 +18,14 @@ check: fmt build test
 build:
 	CGO_ENABLED=$(CGO_ENABLED) $(GO) build -ldflags $(BUILDFLAGS) -o bin/$(NAME) $(MAIN_GO)
 
-test: 
+test:
 	CGO_ENABLED=$(CGO_ENABLED) $(GO) test $(PACKAGE_DIRS) -test.v
+
+test-unit:
+	$(GO) test -v .
+
+test-integration:
+	$(GO) test -v ./tests -addr ${MULDER_ADDR}
 
 full: $(PKGS)
 
@@ -59,4 +65,3 @@ lint: vendor | $(PKGS) $(GOLINT) # ❷
 	@cd $(BASE) && ret=0 && for pkg in $(PKGS); do \
 	    test -z "$$($(GOLINT) $$pkg | tee /dev/stderr)" || ret=1 ; \
 	done ; exit $$ret
-

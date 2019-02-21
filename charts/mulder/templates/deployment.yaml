@@ -24,7 +24,7 @@ spec:
         ports:
         - containerPort: {{ .Values.service.internalPort }}
         args:
-        - redis-addr
+        - -redis-addr
         - {{ .Release.Name }}-redis-master:6379
         livenessProbe:
           httpGet:

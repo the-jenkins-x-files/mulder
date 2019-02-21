@@ -21,6 +21,9 @@ build:
 test: 
 	CGO_ENABLED=$(CGO_ENABLED) $(GO) test $(PACKAGE_DIRS) -test.v
 
+test-integration:
+	$(GO) test -v ./tests -addr ${MULDER_ADDR}
+
 full: $(PKGS)
 
 install:

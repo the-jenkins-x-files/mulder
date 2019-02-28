@@ -34,7 +34,7 @@ pipeline {
             sh "jx preview --app $APP_NAME --namespace $PREVIEW_NAMESPACE --dir ../.."
             sh "wget --server-response --output-document=/dev/null --timeout=60 --tries=10 --retry-connrefused http://mulder.jx-ubermensch01-$PREVIEW_NAMESPACE/"
           }
-          dir('/home/jenkins/go/src/github.com/XXX/mulder') {
+          dir('/home/jenkins/go/src/github.com/ubermensch01/mulder') {
             sh "make test-integration MULDER_ADDR=mulder.jx-ubermensch01-$PREVIEW_NAMESPACE"
           }
         }

@@ -23,7 +23,10 @@ test:
 
 test-unit:
 	$(GO) test -v .
-	
+
+test-integration:
+	$(GO) test -v ./tests -addr ${MULDER_ADDR}
+		
 full: $(PKGS)
 
 install:

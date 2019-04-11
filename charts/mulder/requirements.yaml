@@ -1,3 +1,4 @@
+dependencies:
 - alias: mulder-redis
   name: redis
   repository: https://kubernetes-charts.storage.googleapis.com

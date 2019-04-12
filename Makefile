@@ -24,6 +24,9 @@ test:
 test-unit:
 	CGO_ENABLED=$(CGO_ENABLED) $(GO) test -v .
 
+test-integration:
+	CGO_ENABLED=$(CGO_ENABLED) $(GO) test -v ./tests -addr ${MULDER_ADDR}
+
 full: $(PKGS)
 
 install:

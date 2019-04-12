@@ -23,7 +23,9 @@ spec:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        args: [ "-redis-addr",{{ .Release.Name }}-redis-master:6379 ] 
+        args: 
+          - -redis-addr
+          - {{ .Release.Name }}-redis-master:6379
         env:
 {{- range $pkey, $pval := .Values.env }}
         - name: {{ $pkey }}

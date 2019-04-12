@@ -21,6 +21,9 @@ build:
 test: 
 	CGO_ENABLED=$(CGO_ENABLED) $(GO) test $(PACKAGE_DIRS) -test.v
 
+test-unit:
+	CGO_ENABLED=$(CGO_ENABLED) $(GO) test -v .
+
 full: $(PKGS)
 
 install:

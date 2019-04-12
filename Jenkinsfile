@@ -22,6 +22,7 @@ pipeline {
           dir('/home/jenkins/go/src/github.com/joostvdg/mulder') {
             checkout scm
             sh "make linux"
+	    sh "make test-unit"
             sh "export VERSION=$PREVIEW_VERSION && skaffold build -f skaffold.yaml"
             sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:$PREVIEW_VERSION"
           }
@@ -49,7 +50,8 @@ pipeline {
             // so we can retrieve the version in later steps
             sh "echo \$(jx-release-version) > VERSION"
             sh "jx step tag --version \$(cat VERSION)"
-            sh "make build"
+            sh "make test-unit"
+	    sh "make build"
             sh "export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml"
             sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)"
           }

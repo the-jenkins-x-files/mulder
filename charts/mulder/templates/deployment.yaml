@@ -25,7 +25,7 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         args: 
           - -redis-addr
-          - {{ include "mulder.name" . }}-redis-master:6379
+          - {{ template "fullname" . }}-redis-master:6379
         env:
 {{- range $pkey, $pval := .Values.env }}
         - name: {{ $pkey }}

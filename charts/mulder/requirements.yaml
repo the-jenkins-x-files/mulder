@@ -1,5 +1,5 @@
 dependencies:
 - alias: mulder-redis
-  name: mulder-redis
+  name: redis
   repository: https://kubernetes-charts.storage.googleapis.com
   version: 6.1.0
